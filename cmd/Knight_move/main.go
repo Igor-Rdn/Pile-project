@@ -9,22 +9,22 @@ type position struct {
 	y int // j
 }
 
-var available_moves = []position{{2, 1}, {2, -1}, {-2, 1}, {-2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}}
+var availableMoves = []position{{2, 1}, {2, -1}, {-2, 1}, {-2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}}
 
 // Проверка валидности позиции
-func (p position) is_valid() bool {
+func (p position) isValid() bool {
 	return p.x >= 0 && p.x < 8 && p.y >= 0 && p.y < 8
 }
 
 // Определение доступных клеток для следующего шага
-func (cur_pos position) knight_move() (res []position) {
+func (curPos position) knightMove() (res []position) {
 
-	for _, move := range available_moves {
+	for _, move := range availableMoves {
 
-		new_pos := position{cur_pos.x + move.x, cur_pos.y + move.y}
+		newPos := position{curPos.x + move.x, curPos.y + move.y}
 
-		if new_pos.is_valid() {
-			res = append(res, new_pos)
+		if newPos.isValid() {
+			res = append(res, newPos)
 		}
 	}
 	return
@@ -32,11 +32,11 @@ func (cur_pos position) knight_move() (res []position) {
 
 func main() {
 
-	start_pos := position{2, 3}
-	available_position := start_pos.knight_move()
+	startPos := position{2, 3}
+	availablePosition := startPos.knightMove()
 
-	fmt.Println(available_position)
-	fmt.Println(start_pos)
-	fmt.Println(available_moves)
+	fmt.Println(availablePosition)
+	fmt.Println(startPos)
+	fmt.Println(availableMoves)
 
 }

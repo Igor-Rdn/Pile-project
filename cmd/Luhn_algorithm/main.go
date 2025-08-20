@@ -6,16 +6,16 @@ import (
 
 func main() {
 
-	var card_number string
+	var cardNumber string
 	fmt.Print("Введите номер карты (16 цифр): ")
-	fmt.Scanln(&card_number)
+	fmt.Scanln(&cardNumber)
 
-	is_valid, true_last_digit := Luhn(card_number)
+	isValid, trueLastDigit := Luhn(cardNumber)
 
-	if is_valid {
+	if isValid {
 		fmt.Println("The number is valid")
 	} else {
-		fmt.Printf("The number is not valid, the last digit must be:%d", true_last_digit)
+		fmt.Printf("The number is not valid, the last digit must be:%d", trueLastDigit)
 	}
 	fmt.Scanln()
 }

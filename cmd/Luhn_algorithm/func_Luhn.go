@@ -6,7 +6,7 @@ import (
 )
 
 // Проверяет корректность номера карты, если не правильный - возвращает верную последнюю(16-ю) цифру
-func Luhn(number string) (is_valid bool, true_last_digit int) {
+func Luhn(number string) (isValid bool, trueLastDigit int) {
 
 	// починить ошибку | trim лучше или все таки цикл для проверки?
 	if len(number) != 16 || len(strings.Trim(number, "0123456789")) > 0 {
@@ -15,7 +15,7 @@ func Luhn(number string) (is_valid bool, true_last_digit int) {
 	}
 
 	numbers := make([]int, len(number))
-	total_sum := 0
+	totalSum := 0
 
 	// Заполняем слайс цифрами
 	for idx, num := range number {
@@ -31,15 +31,15 @@ func Luhn(number string) (is_valid bool, true_last_digit int) {
 				num = num * 2
 			}
 		}
-		total_sum += num
+		totalSum += num
 	}
 
-	if total_sum%10 == 0 {
-		is_valid = true
+	if totalSum%10 == 0 {
+		isValid = true
 	} else {
 		//Считаем последнюю цифру
-		if (total_sum-numbers[15])%10 != 0 {
-			true_last_digit = 10 - (total_sum-numbers[15])%10
+		if (totalSum-numbers[15])%10 != 0 {
+			trueLastDigit = 10 - (totalSum-numbers[15])%10
 		}
 
 	}
