@@ -9,8 +9,6 @@ type position struct {
 	y int // j
 }
 
-var availableMoves = []position{{2, 1}, {2, -1}, {-2, 1}, {-2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}}
-
 // Проверка валидности позиции
 func (p position) isValid() bool {
 	return p.x >= 0 && p.x < 8 && p.y >= 0 && p.y < 8
@@ -18,6 +16,8 @@ func (p position) isValid() bool {
 
 // Определение доступных клеток для следующего шага
 func (curPos position) knightMove() (res []position) {
+
+	var availableMoves = []position{{2, 1}, {2, -1}, {-2, 1}, {-2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}}
 
 	for _, move := range availableMoves {
 
@@ -30,13 +30,56 @@ func (curPos position) knightMove() (res []position) {
 	return
 }
 
+func findShortestPath(startPos, endPos position) []position {
+
+	queue := []position{startPos}
+	parent := make(map[position]position) //[Child]Parent
+	//i := 0
+
+	for len(queue) > 0 {
+		//i++
+
+		curPos := queue[0]
+
+		if curPos == endPos {
+			break
+		}
+
+		for _, availablePos := range curPos.knightMove() {
+			if _, exists := parent[availablePos]; !exists && availablePos != startPos {
+				queue = append(queue, availablePos)
+				parent[availablePos] = curPos
+			}
+
+		}
+
+		queue = queue[1:]
+		//fmt.Println("i", i, queue)
+
+	}
+	return reconstructPath(endPos, parent)
+}
+
+func reconstructPath(parentPos position, parent map[position]position) (resSlice []position) {
+
+	resSlice = append(resSlice, parentPos)
+
+	for {
+		if childPos, exists := parent[parentPos]; exists {
+			resSlice = append([]position{childPos}, resSlice...)
+			parentPos = childPos
+		} else {
+			break
+		}
+	}
+	return
+}
+
 func main() {
 
 	startPos := position{2, 3}
-	availablePosition := startPos.knightMove()
+	endPos := position{6, 6}
 
-	fmt.Println(availablePosition)
-	fmt.Println(startPos)
-	fmt.Println(availableMoves)
-
+	shortestPath := findShortestPath(startPos, endPos)
+	fmt.Println(shortestPath)
 }
