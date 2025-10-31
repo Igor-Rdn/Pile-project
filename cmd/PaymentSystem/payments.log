@@ -1,0 +1,4 @@
+{"timestamp":"2025-10-13T17:29:30.4783957+03:00","level":"INFO","operation":"payment","paymentType":"Card","amount":500,"status":"SUCCESS","paymentID":"47b03aa231d32072","HiddenCardNumber":"**** **** **** 5678"}
+{"timestamp":"2025-10-13T17:29:30.4795283+03:00","level":"ERROR","operation":"payment","paymentType":"Card","amount":600,"status":"FAILED","error":"insufficient funds: have 500.00, need 600.00","paymentID":"47b03aa231d32072","HiddenCardNumber":"**** **** **** 5678"}
+{"timestamp":"2025-10-13T17:29:30.4795283+03:00","level":"INFO","operation":"refund","paymentType":"Card","amount":200,"status":"SUCCESS","paymentID":"47b03aa231d32072","HiddenCardNumber":"**** **** **** 5678"}
+{"timestamp":"2025-10-13T17:29:30.4800623+03:00","level":"ERROR","operation":"payment","paymentType":"Card","amount":-100,"status":"FAILED","error":"incorrect amount: -100.00","paymentID":"47b03aa231d32072","HiddenCardNumber":"**** **** **** 5678"}
